@@ -21,7 +21,12 @@ const AboutPage: React.FC = () => {
     'React', 'Angular', 'JavaScript', 'Flask', 'Machine Learning', 'Deep Learning',
     'Distributed Systems', 'OOPS', 'Data Structures', 'Computer Networks',
     'Hadoop', 'Scala', 'SMTP', 'GitHub', 'VS Code', 'Google Cloud Platform',
-    'OpenCV', 'Android Studio', 'Microsoft Suite', 'Google Suite'
+    'OpenCV', 'Android Studio', 'Microsoft Suite', 'Google Suite',
+    // Added frameworks and tools
+    'Next.js', 'Redux', 'Tailwind CSS', 'Node.js', 'Express.js', 'Django', 'FastAPI', '.NET Core', 'AWS',
+    'React Testing Library', 'PyTest', 'Postman', 'MongoDB', 'PostgreSQL', 'Redis', 'Firebase',
+    'TensorFlow', 'PyTorch', 'scikit-learn', 'Pandas', 'Matplotlib', 'Seaborn',
+    'Linux', 'Shell Scripting (Bash, PowerShell)'
   ];
 
   const experience = [
