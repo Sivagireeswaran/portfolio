@@ -171,7 +171,7 @@ const AboutPage: React.FC = () => {
                 <div className="flex items-center text-gray-700 dark:text-gray-300">
                   <Mail className="w-5 h-5 mr-3 text-primary-500" /> 
                   <span>sivasath287@gmail.com</span>
-                </div>
+              </div>
               </div>
 
               <motion.div 
@@ -198,15 +198,15 @@ const AboutPage: React.FC = () => {
                 <div className="flex flex-wrap gap-2">
                   {skills.slice(0, 6).map((skill, index) => (
                     <motion.span
-                      key={index}
+                    key={index}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="px-3 py-1 bg-gradient-to-r from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium border border-primary-200 dark:border-primary-700"
-                    >
-                      {skill}
+                  >
+                    {skill}
                     </motion.span>
-                  ))}
+                ))}
                 </div>
               </div>
             </motion.div>
@@ -242,7 +242,7 @@ const AboutPage: React.FC = () => {
                     >
                       <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/30 rounded-xl mb-2 mx-auto">
                         <span className="text-xl">{item.icon}</span>
-                      </div>
+                    </div>
                       <h4 className="text-base font-bold text-gray-900 dark:text-gray-100 mb-1">{item.title}</h4>
                       <p className="text-xs text-gray-600 dark:text-gray-400">{item.desc}</p>
                     </motion.div>
@@ -283,7 +283,7 @@ const AboutPage: React.FC = () => {
                       <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                         <Calendar className="mr-2 h-4 w-4" />
                         <span>{job.period}</span>
-                      </div>
+                  </div>
                     </div>
                   </div>
                   <div className="ml-16">
@@ -343,7 +343,7 @@ const AboutPage: React.FC = () => {
                       <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-3">
                         <Calendar className="mr-2 h-4 w-4" />
                         <span>{edu.year}</span>
-                      </div>
+                  </div>
                       <p className="text-gray-700 dark:text-gray-300">{edu.description}</p>
                     </div>
                   </div>
@@ -387,7 +387,7 @@ const AboutPage: React.FC = () => {
             <SectionTitle title="Certifications" subtitle="Professional Credentials" />
             <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
               <ul className="space-y-3 mb-6">
-                {certifications.map((cert, idx) => (
+              {certifications.map((cert, idx) => (
                   <motion.li 
                     key={idx}
                     initial={{ opacity: 0, x: -10 }}
@@ -398,28 +398,28 @@ const AboutPage: React.FC = () => {
                     <CheckCircle className="text-primary-500 mr-3 h-5 w-5 flex-shrink-0" />
                     {cert}
                   </motion.li>
-                ))}
-              </ul>
+              ))}
+            </ul>
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
                 className="flex items-center"
               >
-                <a
-                  href="https://drive.google.com/drive/folders/1rwxgJuE1z3FEStHd3KbxKuhsrtSPYWjl"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <a
+                href="https://drive.google.com/drive/folders/1rwxgJuE1z3FEStHd3KbxKuhsrtSPYWjl"
+                target="_blank"
+                rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:underline text-primary-600 hover:text-primary-800 dark:hover:text-primary-400 transition-colors duration-300"
-                >
-                  <img
-                    src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png"
-                    alt="Google Drive"
-                    className="w-7 h-7 mr-2 inline-block align-middle"
-                  />
-                  <span className="font-medium">Certifications Repository – For more Certification</span>
+              >
+                <img
+                  src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png"
+                  alt="Google Drive"
+                  className="w-7 h-7 mr-2 inline-block align-middle"
+                />
+                <span className="font-medium">Certifications Repository – For more Certification</span>
                   <ExternalLink className="w-4 h-4" />
-                </a>
+              </a>
               </motion.div>
             </div>
           </div>
