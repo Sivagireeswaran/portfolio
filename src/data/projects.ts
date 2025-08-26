@@ -245,4 +245,82 @@ export const projects: Project[] = [
     link: '',
     icon: React.createElement(Palette)
   }
+  ,
+  {
+    id: 'accredian-fraud-detection',
+    title: 'Accredian Fraud Detection',
+    description: 'End-to-end fraud detection pipeline with robust feature engineering, balanced training, and explainable evaluation for high-risk transaction identification.',
+    thumbnail: '/fraud_detection.png',
+    images: [
+      '/fraud_detection.png'
+    ],
+    role: 'Data Scientist',
+    year: '2025',
+    client: 'Accredian',
+    tags: ['Python', 'Pandas', 'scikit-learn', 'SMOTE', 'RandomForest', 'SHAP'],
+    objectives: 'Detect fraudulent transactions at scale and reduce false positives through targeted features and model tuning.',
+    outcome: 'Thoroughly evaluated with precision/recall, F1, ROC-AUC and PR curves; insights validated via feature importances and SHAP to ensure domain plausibility.',
+    features: [
+      'Ingested 6.36M transactions; validated completeness and profiled distributions',
+      'Targeted features: merchant id, type encoding, balance discrepancy signals',
+      'Leakage prevention by dropping identifiers and post-event fields',
+      'Stratified train/test split with scaling and SMOTE balancing',
+      'Tuned class-weighted RandomForest for imbalanced data',
+      'Comprehensive evaluation: precision, recall, F1, ROC-AUC, PR curve, confusion matrix',
+      'Explainability with feature importances and SHAP'
+    ],
+    link: 'https://github.com/Sivagireeswaran/Fraud_detection',
+    icon: React.createElement(Shield)
+  }
+  ,
+  {
+    id: 'text-similarity-api',
+    title: 'Text Similarity API Service',
+    description: 'Production-ready semantic similarity API using Flask and Sentence-BERT to compute similarity scores for text pairs. Fast, scalable, and container-friendly.',
+    thumbnail: '/text_similarity.png',
+    images: [
+      '/text_similarity.png'
+    ],
+    role: 'Backend NLP Engineer',
+    year: '2025',
+    client: 'Data Neuron',
+    tags: ['Python', 'Flask', 'SentenceTransformers', 'Gunicorn', 'Docker'],
+    objectives: 'Provide a robust REST API to compute semantic similarity with low latency and easy deployment.',
+    outcome: 'Deployed API with health, model info, and single/batch similarity endpoints; optimized inference for responsiveness and reliability.',
+    features: [
+      'Endpoints: /health, /model_info, /similarity, /batch_similarity',
+      'RESTful design with JSON request/response',
+      'Fast inference via pre-trained Sentence-BERT models',
+      'Dockerized for seamless production deployment',
+      'Scalable with Gunicorn workers'
+    ],
+    link: 'https://semantic-similarity-api-production-d0eb.up.railway.app/',
+    icon: React.createElement(Cloud)
+  }
+  ,
+  {
+    id: 'biomechanics-video-analysis',
+    title: 'Biomechanics Video Analysis',
+    description: 'Computer vision pipeline that extracts biomechanical insights from football videos by detecting player-ball interactions, computing kinematic features, and overlaying metrics on video with structured CSV reporting.',
+    thumbnail: '/public/football.png.jpg',
+    images: [
+      '/football.png'
+    ],
+    role: 'Computer Vision Engineer',
+    year: '2025',
+    client: 'Flickit',
+    tags: ['Python', 'OpenCV', 'YOLOv8', 'NumPy', 'Pandas', 'Computer Vision','Supervision model'],
+    objectives: 'Bridge AI and sports analytics to quantify player-ball dynamics and generate actionable biomechanical metrics from video.',
+    outcome: 'End-to-end system that annotates videos with kinematic overlays and exports per-event and per-player CSV reports for downstream analytics.',
+    features: [
+      'YOLOv8 detection for players and ball; motion tracking and association',
+      'Kinematic computation: velocity, acceleration, rotation estimates',
+      'On-video overlays for metrics and player/leg-level summaries',
+      'CSV reports with feature extraction and statistical summaries',
+      'Modularized Python pipeline with scalable processing stages',
+      'Sports biomechanics context for actionable insights'
+    ],
+    link: '',
+    icon: React.createElement(Activity)
+  }
 ];
