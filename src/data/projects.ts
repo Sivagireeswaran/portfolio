@@ -302,7 +302,7 @@ export const projects: Project[] = [
     id: 'biomechanics-video-analysis',
     title: 'Biomechanics Video Analysis',
     description: 'Computer vision pipeline that extracts biomechanical insights from football videos by detecting player-ball interactions, computing kinematic features, and overlaying metrics on video with structured CSV reporting.',
-    thumbnail: '/public/football.png.jpg',
+    thumbnail: '/football.png',
     images: [
       '/football.png'
     ],

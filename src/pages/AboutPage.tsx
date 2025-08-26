@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionTitle from '../components/ui/SectionTitle';
-import { CheckCircle, Calendar, GraduationCap, Briefcase, Award, BookOpen, Users, Cloud, Database, Activity, BarChart2, Map, Mail, MapPin, Download, ExternalLink } from 'lucide-react';
+import SkillBar, { SkillLevel } from '../components/ui/SkillBar';
+import { CheckCircle, Calendar, GraduationCap, Briefcase, Award, BookOpen, Mail, MapPin, Download, ExternalLink } from 'lucide-react';
 
 const AboutPage: React.FC = () => {
   const [ref, inView] = useInView({
@@ -16,18 +17,88 @@ const AboutPage: React.FC = () => {
     threshold: 0.3,
   });
 
-  const skills = [
-    'Python', 'C#', 'Java', 'HTML/CSS', 'SQL', 'MySQL',
-    'React', 'Angular', 'JavaScript', 'Flask', 'Machine Learning', 'Deep Learning',
-    'Distributed Systems', 'OOPS', 'Data Structures', 'Computer Networks',
-    'Hadoop', 'Scala', 'SMTP', 'GitHub', 'VS Code', 'Google Cloud Platform',
-    'OpenCV', 'Android Studio', 'Microsoft Suite', 'Google Suite',
-    // Added frameworks and tools
-    'Next.js', 'Redux', 'Tailwind CSS', 'Node.js', 'Express.js', 'Django', 'FastAPI', '.NET Core', 'AWS',
-    'React Testing Library', 'PyTest', 'Postman', 'MongoDB', 'PostgreSQL', 'Redis', 'Firebase',
-    'TensorFlow', 'PyTorch', 'scikit-learn', 'Pandas', 'Matplotlib', 'Seaborn',
-    'Linux', 'Shell Scripting (Bash, PowerShell)'
+  // Spotlight skills for bars (6-8)
+  const spotlightSkills: { name: string; level: SkillLevel; score: number; proofLinks?: { label: string; href: string }[] }[] = [
+    { name: 'Python', level: 'Expert', score: 92, proofLinks: [ { label: 'Fraud Detection (GitHub)', href: 'https://github.com/Sivagireeswaran/Fraud_detection' } ] },
+    { name: 'scikit-learn', level: 'Advanced', score: 85, proofLinks: [ { label: 'Fraud Detection Metrics', href: 'https://github.com/Sivagireeswaran/Fraud_detection' } ] },
+    { name: 'Sentence-BERT / NLP', level: 'Advanced', score: 82, proofLinks: [ { label: 'Semantic Similarity API', href: 'https://semantic-similarity-api-production-d0eb.up.railway.app/' } ] },
+    { name: 'React', level: 'Advanced', score: 80, proofLinks: [ { label: 'HRMS Enhancements (Portfolio)', href: '/portfolio#hrms-enhancements' } ] },
+    { name: 'OpenCV / CV', level: 'Advanced', score: 78, proofLinks: [ { label: 'Biomechanics Analysis', href: '#' } ] },
+    { name: 'Docker', level: 'Advanced', score: 76, proofLinks: [ { label: 'API Deployment', href: 'https://semantic-similarity-api-production-d0eb.up.railway.app/' } ] },
+    { name: 'Multimodal Classification (BERT + VGG19)', level: 'Advanced', score: 81, proofLinks: [ { label: 'IEEE Xplore Paper', href: 'https://ieeexplore.ieee.org/abstract/document/10899719' } ] },
+    { name: 'Product & PM (PRDs, A/B)', level: 'Advanced', score: 78 },
   ];
+
+  const skills = [
+    // Core programming & CS fundamentals
+    'Python', 'C#', 'Java', 'JavaScript', 'TypeScript', 'HTML/CSS',
+    'Data Structures & Algorithms', 'OOP', 'Distributed Systems', 'Computer Networks',
+
+    // Web & App frameworks
+    'React', 'Angular', 'Next.js', 'Redux', 'Tailwind CSS', 'Node.js', 'Express.js', 'Flask', 'Django', 'FastAPI', '.NET Core',
+
+    // Databases & Cloud
+    'SQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'AWS', 'Google Cloud Platform',
+
+    // ML / DL toolchain
+    'scikit-learn', 'Pandas', 'NumPy', 'TensorFlow', 'PyTorch', 'OpenCV', 'Matplotlib', 'Seaborn', 'SHAP', 'Optuna',
+
+    // Foundation & task-specific models
+    'GPT-4 / 4o', 'LLaMA', 'Claude', 'BERT / RoBERTa', 'Sentence-BERT', 'VGG16 / VGG19', 'YOLOv8', 'RandomForest', 'XGBoost', 'LightGBM',
+
+    // MLOps & Deployment
+    'Docker', 'GitHub Actions (CI/CD)', 'Gunicorn', 'Railway / Vercel', 'DVC', 'MLflow',
+
+    // Data engineering & orchestration
+    'ETL Pipelines', 'Airflow', 'Data Validation',
+
+    // Product & PM
+    'Product Discovery', 'A/B Testing', 'Experiment Design', 'PRD Writing', 'Jira', 'Confluence', 'Scrum', 'Kanban',
+
+    // Tooling & productivity
+    'Git/GitHub', 'VS Code', 'Linux', 'Shell Scripting (Bash, PowerShell)', 'Postman'
+  ];
+
+  // Structured skills by category for better UX
+  const skillCategories: Record<string, string[]> = {
+    'Core CS': [
+      'Python', 'C#', 'Java', 'JavaScript', 'TypeScript', 'HTML/CSS',
+      'Data Structures & Algorithms', 'OOP', 'Distributed Systems', 'Computer Networks'
+    ],
+    'Frontend': [
+      'React', 'Angular', 'Next.js', 'Redux', 'Tailwind CSS'
+    ],
+    'Backend': [
+      'Node.js', 'Express.js', 'Flask', 'Django', 'FastAPI', '.NET Core'
+    ],
+    'Databases & Cloud': [
+      'SQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'AWS', 'Google Cloud Platform'
+    ],
+    'ML / DL': [
+      'scikit-learn', 'Pandas', 'NumPy', 'TensorFlow', 'PyTorch', 'OpenCV', 'Matplotlib', 'Seaborn', 'SHAP', 'Optuna'
+    ],
+    'Models': [
+      'GPT-4 / 4o', 'LLaMA', 'Claude', 'BERT / RoBERTa', 'Sentence-BERT', 'VGG16 / VGG19', 'YOLOv8', 'RandomForest', 'XGBoost', 'LightGBM'
+    ],
+    'MLOps & Deploy': [
+      'Docker', 'GitHub Actions (CI/CD)', 'Gunicorn', 'Railway / Vercel', 'DVC', 'MLflow'
+    ],
+    'Data Eng': [
+      'ETL Pipelines', 'Airflow', 'Data Validation'
+    ],
+    'Product & PM': [
+      'Product Discovery', 'A/B Testing', 'Experiment Design', 'PRD Writing', 'Jira', 'Confluence', 'Scrum', 'Kanban'
+    ],
+    'Tooling': [
+      'Git/GitHub', 'VS Code', 'Linux', 'Shell Scripting (Bash, PowerShell)', 'Postman'
+    ],
+  };
+
+  const categoryKeys = Object.keys(skillCategories);
+  const [activeCategory, setActiveCategory] = React.useState<string>(categoryKeys[0]);
+  const [skillSearch, setSkillSearch] = React.useState<string>('');
+  const [showAll, setShowAll] = React.useState<boolean>(false);
+  const roadmapSkills: string[] = ['C++', 'Go', 'Rust'];
 
   const experience = [
     {
@@ -36,7 +107,10 @@ const AboutPage: React.FC = () => {
       period: 'June 2025 – Present',
       description: (
         <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-          <li>Conducting research on advanced image generation algorithms and analyzing their interplay with natural language processing (NLP) models to explore multi-modal AI capabilities.</li>
+          <li>Researched state-of-the-art diffusion models and controllable image generation; evaluated multi-modal alignment with CLIP-style objectives for text-to-image grounding.</li>
+          <li>Built prototype pipelines integrating prompt engineering, safety filters, and image post-processing to improve visual fidelity and reduce artifacts.</li>
+          <li>Designed lightweight user studies to benchmark prompt templates and guidance strategies; analyzed outcomes to recommend default presets for internal tools.</li>
+          <li>Collaborated on productizing model endpoints (FastAPI + Docker) and documented PRDs for future features, aligning research with roadmap and stakeholder needs.</li>
         </ul>
       ),
     },
@@ -297,28 +371,118 @@ const AboutPage: React.FC = () => {
           {/* Skills Section */}
           <div className="mb-20">
             <SectionTitle title="Technical Skills" subtitle="Languages, Tools & Technologies" />
-            <motion.div
-              ref={ref}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-            >
-              {skills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="group bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-700"
-                >
-                  <div className="flex items-center">
-                    <CheckCircle className="text-primary-500 mr-3 h-5 w-5 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-gray-800 dark:text-gray-200 font-medium">{skill}</span>
-                  </div>
-                </motion.div>
+            {/* Spotlight bars */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {spotlightSkills.slice(0, 8).map((s, idx) => (
+                <SkillBar key={s.name} name={s.name} score={s.score} level={s.level} proofLinks={s.proofLinks} delay={idx * 0.05} />
               ))}
-            </motion.div>
+            </div>
+
+            {/* Secondary categorized skills with tabs, search, and show more */}
+            <div className="mb-4 flex flex-col gap-4">
+              <div className="flex flex-wrap gap-2">
+                {categoryKeys.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => { setActiveCategory(cat); setShowAll(false); setSkillSearch(''); }}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === cat ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+              <div>
+                <input
+                  value={skillSearch}
+                  onChange={(e) => setSkillSearch(e.target.value)}
+                  placeholder="Search skills..."
+                  className="w-full md:w-96 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                />
+              </div>
+            </div>
+
+            {(() => {
+              const allForCat = skillCategories[activeCategory] || [];
+              const filtered = allForCat.filter(s => s.toLowerCase().includes(skillSearch.toLowerCase()));
+              const visible = showAll ? filtered : filtered.slice(0, 12);
+              return (
+                <>
+                  {filtered.length === 0 ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 p-6 text-center bg-white/50 dark:bg-gray-900/30"
+                    >
+                      {/* Intentionally omit the "No matches found" headline to keep it friendly */}
+                      <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {skillSearch.trim() ? (
+                          <>
+                            {(() => {
+                              const q = skillSearch.trim().toLowerCase();
+                              if (['c++', 'cpp'].includes(q)) return 'C++ — keep this as a placeholder. If asked, replace with this line.';
+                              if (q.includes('oops')) return 'OOP? Always — it powers most of my architecture decisions.';
+                              if (q.includes('why')) return "Why this skill? Because it solves real user problems at scale.";
+                              return `I'm currently learning this — stay tuned!`;
+                            })()}
+                          </>
+                        ) : "I'm currently learning this — stay tuned!"}
+                      </div>
+                      <div className="mt-2">
+                        <div className="flex flex-wrap justify-center gap-2">
+                          {roadmapSkills
+                            .filter(s => !skillSearch || s.toLowerCase().includes(skillSearch.toLowerCase()))
+                            .map(s => (
+                              <span key={s} className="px-3 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300 border border-primary-200 dark:border-primary-700">
+                                {s}
+                              </span>
+                            ))}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => { setSkillSearch(''); setShowAll(false); }}
+                        className="px-4 py-2 rounded-full bg-primary-600 text-white text-sm hover:bg-primary-700"
+                      >
+                        Clear search
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      ref={ref}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.4 }}
+                      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                    >
+                      {visible.map((skill, index) => (
+                        <motion.div
+                          key={skill}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                          transition={{ duration: 0.25, delay: index * 0.02 }}
+                          className="group bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-700"
+                        >
+                          <div className="flex items-center">
+                            <CheckCircle className="text-primary-500 mr-2 h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                            <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{skill}</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                  {filtered.length > 12 && (
+                    <div className="flex justify-center mt-6">
+                      <button
+                        onClick={() => setShowAll(!showAll)}
+                        className="px-5 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                      >
+                        {showAll ? 'Show less' : `Show more (${filtered.length - 12})`}
+                      </button>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
           </div>
 
           {/* Education Section */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Button from '../ui/Button';
 
@@ -11,12 +11,36 @@ const Hero: React.FC = () => {
     }
   };
 
+  // Parallax based on scroll
+  const { scrollY } = useScroll();
+  const yOrb1 = useTransform(scrollY, [0, 600], [0, -60]);
+  const yOrb2 = useTransform(scrollY, [0, 600], [0, 40]);
+  const yOrb3 = useTransform(scrollY, [0, 600], [0, -30]);
+
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 dark:bg-primary-900 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute top-1/3 -left-20 w-60 h-60 bg-secondary-200 dark:bg-secondary-900 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-20 right-1/4 w-40 h-40 bg-accent-200 dark:bg-accent-900 rounded-full opacity-20 blur-3xl"></div>
+        <motion.div
+          initial={{ y: -20, opacity: 0.2 }}
+          animate={{ y: [ -20, 10, -20 ], opacity: 0.25 }}
+          transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+          style={{ y: yOrb1 }}
+          className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 dark:bg-primary-900 rounded-full blur-3xl"
+        />
+        <motion.div
+          initial={{ y: 0, opacity: 0.2 }}
+          animate={{ y: [ 0, -15, 0 ], opacity: 0.25 }}
+          transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut', delay: 0.6 }}
+          style={{ y: yOrb2 }}
+          className="absolute top-1/3 -left-20 w-60 h-60 bg-secondary-200 dark:bg-secondary-900 rounded-full blur-3xl"
+        />
+        <motion.div
+          initial={{ y: 10, opacity: 0.2 }}
+          animate={{ y: [ 10, -10, 10 ], opacity: 0.25 }}
+          transition={{ repeat: Infinity, duration: 9, ease: 'easeInOut', delay: 0.3 }}
+          style={{ y: yOrb3 }}
+          className="absolute bottom-20 right-1/4 w-40 h-40 bg-accent-200 dark:bg-accent-900 rounded-full blur-3xl"
+        />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
@@ -28,19 +52,21 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="w-full lg:w-1/2 flex flex-col justify-center items-start lg:items-start"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-gray-100 mb-8 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-gray-900 dark:text-gray-100 mb-8 tracking-tight">
               Crafting Digital{' '}
-              <span className="text-primary-600 dark:text-primary-400 inline-block mt-2">Experiences</span>{' '}
+              <span className="bg-gradient-to-r from-primary-500 via-accent-500 to-secondary-500 bg-clip-text text-transparent inline-block mt-2">
+                Experiences
+              </span>{' '}
               That Inspire
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-lg leading-relaxed">
             Solving real-world problems with AI from offensive meme detection to AI-powered marketing tools. I blend full-stack engineering with deep learning and NLP to build impactful, scalable systems.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button to="/portfolio" size="lg">
+              <Button to="/portfolio" size="lg" className="shadow-lg shadow-primary-500/20">
                 View My Work
               </Button>
-              <Button to="/contact" variant="outline" size="lg">
+              <Button to="/contact" variant="outline" size="lg" className="backdrop-blur-sm">
                 Get In Touch
               </Button>
             </div>

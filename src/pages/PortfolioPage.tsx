@@ -84,20 +84,36 @@ const PortfolioPage: React.FC = () => {
           {/* Categories Filter */}
           <div className="flex flex-wrap justify-center mb-12 gap-2">
             {categories.slice(0, 8).map((category, index) => (
-              <motion.button
+              <motion.div
                 key={category}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedCategory === category
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-                onClick={() => setSelectedCategory(category)}
+                whileHover={{ y: -2 }}
+                onMouseMove={(e) => {
+                  const target = e.currentTarget as HTMLDivElement;
+                  const rect = target.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  target.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.currentTarget as HTMLDivElement;
+                  target.style.transform = '';
+                }}
+                className="relative"
               >
-                {category}
-              </motion.button>
+                <button
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    selectedCategory === category
+                      ? 'bg-primary-600 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </button>
+              </motion.div>
             ))}
           </div>
 

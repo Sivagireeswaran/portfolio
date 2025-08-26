@@ -15,21 +15,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
+      whileHover={{ y: -4 }}
+      className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100/60 dark:border-gray-700/60"
     >
       <div className="relative overflow-hidden">
         <div className="relative">
           <img
             src={project.thumbnail}
             alt={project.title}
-            className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110"
           />
           {/* Fixed overlay gradient */}
-          <div className="absolute inset-0 
-  bg-gradient-to-t from-black/50 via-black/20 to-transparent 
-  dark:bg-transparent 
-  opacity-0 group-hover:opacity-100 
-  transition-all duration-300 flex items-end">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent dark:bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
   <div className="p-4 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
     <div className="flex flex-wrap gap-2 mb-2">
       {project.tags.slice(0, 3).map((tag, idx) => (
